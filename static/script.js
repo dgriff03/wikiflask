@@ -43,8 +43,8 @@ $(document).ready(function(){
                 var color = d3.scale.category20();
 
                 var force = d3.layout.force()
-                    .charge(-500)
-                    .linkDistance(225)
+                    .charge(-250)
+                    .linkDistance(150)
                     .friction(0.9)
                     .linkStrength(0.02)
                     .size([width, height]);
