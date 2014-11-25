@@ -4,7 +4,7 @@ $(document).ready(function(){
           type: "GET",
           url: "/getData",
           success: function(res){
-                data = JSON.parse(res);
+                data = res; 
                 titlelinks = data;
                 count = 0;
                 nodesDic = {}
@@ -14,7 +14,7 @@ $(document).ready(function(){
 
                 // }
 
-                console.log(data['titlelinks']);
+                console.log(data);
               },
           dataType: "json"
         });
