@@ -37,16 +37,17 @@ $(document).ready(function(){
                 }
                 var graph = {"nodes": nodes, "links": links};
 
-                var width = 960;
-                var height = 500;
+                var width = 1080;
+                var height = 1080;
 
                 var color = d3.scale.category20();
 
                 var force = d3.layout.force()
                     .charge(-250)
                     .linkDistance(150)
-                    .friction(0.9)
-                    .linkStrength(0.02)
+                    .friction(0.95)
+                    .gravity(0.1)
+                    .linkStrength(0.1)
                     .size([width, height]);
 
                 var svg = d3.select("body").append("svg")
