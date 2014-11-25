@@ -3,54 +3,18 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-    <title>flask+d3 Hello World</title>
-
+    <title>WikiFlask</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://d3js.org/d3.v2.js"></script>
-
-    <style>
-path.line {
-    fill: none;
-    stroke: #666;
-    stroke-width: 1.5px;
-}
-.domain {
-    stroke-width: 1px;
-}
-circle {
-    cursor: pointer;
-}
-.axis {
-    shape-rendering: crispEdges;
-}
-.axis line, .axis path {
-    stroke-width: 1px;
-    stroke: #000;
-    fill: none;
-}
-.tooltip {
-    display: none;
-}
-.tooltip.active {
-    display: block;
-}
-.tooltip rect {
-    fill: #ff0000;
-}
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+  
 </head>
 <body>
 
-    <h1>Hello World using d3.js &amp; Flask</h1>
+    <h1>WikiFlask</h1>
 
-    <p>Taken from Dan F.M.'s <a href="https://github.com/dfm/flask-d3-hello-world">flask-d3-hellow-world</a> and forked <a href="https://github.com/cranmer/flask-d3-hello-world">here</a>.
-    <div id="info">
-        <div id="point-info">
-            Click on a point.
-        </div>
-    </div>
-
-    <div id="plot">
+    <div id="main">
+    Loading -- from: Soweto to: Roodepoort
     </div>
 
     <script src="/static/script.js"></script>

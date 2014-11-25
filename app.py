@@ -3,6 +3,7 @@ from flask import Flask,render_template,request
 from flask import request
 import json
 import numpy as np
+import requests
 # import pymysql
 
 app = Flask(__name__)
@@ -10,6 +11,18 @@ app = Flask(__name__)
 @app.route('/', methods=['get'])
 def home():
     return render_template("index.html")
+
+
+@app.route("/getData")
+def get_data():
+    url = "http://ec2-54-173-58-136.compute-1.amazonaws.com:8001/titlelinks/path2?from=Soweto&to=Roodepoort"
+    jsonData = json.loads(requests.get(url).text)
+    try:
+        strs = json['titlelinks'].replace('[','').split('],')
+        lits = [s.replace('[','').split('],') for s in strs]
+        return json.dumps(lits)
+    except:
+        return json.dumps({"error":"error"})
 
 
 @app.route("/data")
