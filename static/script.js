@@ -3,7 +3,9 @@ $(document).ready(function(){
     $.ajax({
           type: "GET",
           url: "/getData",
+          data: { from_page: "Soweto", to_page: "Roodepoort" },
           success: function(data){
+            document.getElementById("from_text").value = "Hello!";
             console.log(data);  
                 nodesDic = {};
                 nodes = [];
@@ -468,4 +470,6 @@ $(document).ready(function(){
 //     {"source":76,"target":58,"value":1}
 //   ]
 // };
+
+
 
