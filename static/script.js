@@ -4,6 +4,7 @@ $(document).ready(function(){
           type: "GET",
           url: "/getData",
           success: function(data){
+            console.log(data);  
                 nodesDic = {};
                 nodes = [];
                 links = [];
@@ -29,7 +30,7 @@ $(document).ready(function(){
                     }
                     for (var j = 0; j < num_in_path - 1; j++) {
                         if (i == 0){
-                            links.push({"source": nodesDic[path[j]], "target": nodesDic[path[j + 1]], "value": 50});
+                            links.push({"source": nodesDic[path[j]], "target": nodesDic[path[j + 1]], "value": 10});
                         }else{
                             links.push({"source": nodesDic[path[j]], "target": nodesDic[path[j + 1]], "value": 1});
                         }
@@ -43,11 +44,11 @@ $(document).ready(function(){
                 var color = d3.scale.category20();
 
                 var force = d3.layout.force()
-                    .charge(-250)
-                    .linkDistance(150)
+                    .charge(-500)
+                    .linkDistance(250)
                     .friction(0.95)
                     .gravity(0.1)
-                    .linkStrength(0.1)
+                    .linkStrength(0.01)
                     .size([width, height]);
 
                 var svg = d3.select("body").append("svg")
@@ -77,6 +78,26 @@ $(document).ready(function(){
                       .attr("r", 5)
                       .style("fill", function(d) { return color(d.group); })
                       .call(force.drag);
+
+
+
+                      node.on('mouseover', function(d) {
+                          link.style('stroke-width', function(l) {
+                            if (d === l.source || d === l.target)
+                              return 4;
+                            else
+                              return 1;
+                            });
+                          link.style('stroke', function(l) {
+                            if (d === l.source || d === l.target)
+                              return "blue";
+                            });
+                        });
+
+                    // Set the stroke width back to normal when mouse leaves the node.
+                    node.on('mouseout', function() {
+                      link.style('stroke-width', 1);
+                      link.style('stroke', "gray")});
 
                   var labels = gnodes.append("text")
                       .text(function(d) { return d.name; });

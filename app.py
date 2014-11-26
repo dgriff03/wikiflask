@@ -16,7 +16,7 @@ def home():
 def get_data():
     try:
         from ast import literal_eval
-        url = "http://ec2-54-173-58-136.compute-1.amazonaws.com:8001/titlelinks/path2?from=IKenya&to=IMali"
+        url = "http://ec2-54-173-58-136.compute-1.amazonaws.com:8001/titlelinks/path2?from=Soweto&to=Roodepoort"
         res = requests.get(url)
         text = res.text
         text = text[15:-2]
