@@ -1,11 +1,27 @@
-$(document).ready(function(){
+//$(document).ready(function(){
+//    $(#search).click(function(){
 
+function search() {
+    var from_text = document.getElementById("from_text").value
+    var to_text = document.getElementById("to_text").value
+    if (from_text == "" || to_text == "") {
+        alert("Please enter source and destination");
+    } else {
+    document.getElementById("searching").style.visibility = "visible";
     $.ajax({
           type: "GET",
           url: "/getData",
-          data: { from_page: "Soweto", to_page: "Roodepoort" },
+          data: { from_page: from_text, to_page: to_text },
           success: function(data){
-            document.getElementById("from_text").value = "Hello!";
+            document.getElementById("searching").style.visibility = "hidden";
+            if (data["error"] == "error") {
+                alert("Unable to access server");
+                return;
+            }
+            if (data.length < 2) {
+               alert("No paths found");
+               return;     
+            }
             console.log(data);  
                 nodesDic = {};
                 nodes = [];
@@ -94,6 +110,7 @@ $(document).ready(function(){
                             if (d === l.source || d === l.target)
                               return "blue";
                             });
+
                         });
 
                     // Set the stroke width back to normal when mouse leaves the node.
@@ -131,7 +148,8 @@ $(document).ready(function(){
               },
           dataType: "json"
         });
-});
+    }
+}
 
 // var graph = {
 //   "nodes":[
