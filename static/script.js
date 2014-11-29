@@ -11,14 +11,14 @@ function search() {
     $.ajax({
           type: "GET",
           url: "/getData",
-          data: { from_page: from_text, to_page: to_text },
+          data: { "from_page": from_text, "to_page": to_text },
           success: function(data){
             document.getElementById("searching").style.visibility = "hidden";
             if (data["error"] == "error") {
                 alert("Unable to access server");
                 return;
             }
-            if (data.length < 2) {
+            if (data.length < 1) {
                alert("No paths found");
                return;     
             }
