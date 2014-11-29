@@ -7,3 +7,8 @@
   stroke: #999;
   stroke-opacity: .6;
 }
+
+.currentPath{
+	stroke:blue !important;
+	stroke-width:4px !important;
+}

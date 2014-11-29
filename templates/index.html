@@ -17,14 +17,22 @@
     <label>From</label>
     <select id = "from_text">
         {% for word in Words["from"] %}
-        <option value="{{word}}">{{word}}</option>
+            {% if word == "Soweto" %}
+                <option value="{{word}}" selected="selected">{{word}}</option>
+            {% else %}
+                <option value="{{word}}">{{word}}</option>
+            {% endif %}        
         {% endfor %}
     </select>
     <br>
     <label>To</label>
     <select id = "to_text">
         {% for word in Words["to"] %}
-        <option value="{{word}}">{{word}}</option>
+            {% if word == "Roodepoort" %}
+                <option value="{{word}}" selected="selected">{{word}}</option>
+            {% else %}
+                <option value="{{word}}">{{word}}</option>
+            {% endif %}
         {% endfor %}
     </select>
 <!--     From: <input id = "from_text"></input>

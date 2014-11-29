@@ -22,7 +22,7 @@ function search() {
                alert("No paths found");
                return;     
             }
-            console.log(data);  
+            //console.log(data);  
                 nodesDic = {};
                 nodes = [];
                 links = [];
@@ -100,23 +100,24 @@ function search() {
 
 
                       node.on('mouseover', function(d) {
-                          link.style('stroke-width', function(l) {
-                            if (d === l.source || d === l.target)
-                              return 4;
-                            else
-                              return 1;
-                            });
-                          link.style('stroke', function(l) {
-                            if (d === l.source || d === l.target)
-                              return "blue";
-                            });
+                          // link.style('stroke-width', function(l) {
+                          //   if (d === l.source || d === l.target)
+                          //     return 4;
+                          //   else
+                          //     return 1;
+                          //   });
+                          link.classed("currentPath", function(l) {
+                            return (d === l.source || d === l.target)
+                          });
 
                         });
 
                     // Set the stroke width back to normal when mouse leaves the node.
                     node.on('mouseout', function() {
-                      link.style('stroke-width', 1);
-                      link.style('stroke', "gray")});
+                      // link.style('stroke-width', 1);
+                      // link.style('stroke', "gray")});
+                      link.classed("currentPath",false);
+                     });
 
                   var labels = gnodes.append("text")
                       .text(function(d) { return d.name; });
