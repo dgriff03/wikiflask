@@ -1,6 +1,22 @@
 //$(document).ready(function(){
 //    $(#search).click(function(){
 
+function setList(ListofLists) {
+  //Only works with integers
+    var temp = {};
+    for (var i = 0; i < ListofLists.length; i++){
+      List = ListofLists[i];
+      for (var j = 0; j < List.length; j++){ 
+        temp[List[j]] = true;
+      }
+    }
+    var r = [];
+    for (var k in temp)
+        r.push(parseInt(k));
+    return r;
+}
+
+
 function search() {
     var from_text = document.getElementById("from_text").value
     var to_text = document.getElementById("to_text").value
@@ -26,9 +42,11 @@ function search() {
                 nodesDic = {};
                 nodes = [];
                 links = [];
+                pathsLinks = {};
                 var first_path_count = 0;
                 var num_paths = data.length;
                 for(var i = 0; i < num_paths; i++){
+                    current_path = [];
                     var path = data[i];
                     var num_in_path = path.length;
                     for (var j = 0; j < num_in_path; j++){
@@ -47,13 +65,25 @@ function search() {
                         first_path_count = num_in_path - 1;
                     }
                     for (var j = 0; j < num_in_path - 1; j++) {
+                        current_path.push( links.length );
                         if (i == 0){
                             links.push({"source": nodesDic[path[j]], "target": nodesDic[path[j + 1]], "value": 10});
                         }else{
                             links.push({"source": nodesDic[path[j]], "target": nodesDic[path[j + 1]], "value": 1});
                         }
                     }
+                    for (var j = 0; j < num_in_path; j++){
+                      if(pathsLinks[path[j]] == undefined){
+                        pathsLinks[path[j]] = [];
+                      }
+                      pathsLinks[path[j]].push(current_path);
+                    }
                 }
+
+                for (var k in pathsLinks){
+                  pathsLinks[k] = setList(pathsLinks[k]);
+                }
+
                 var graph = {"nodes": nodes, "links": links};
 
                 var width = 1080;
@@ -100,22 +130,15 @@ function search() {
 
 
                       node.on('mouseover', function(d) {
-                          // link.style('stroke-width', function(l) {
-                          //   if (d === l.source || d === l.target)
-                          //     return 4;
-                          //   else
-                          //     return 1;
-                          //   });
-                          link.classed("currentPath", function(l) {
-                            return (d === l.source || d === l.target)
+                          linksPresent = pathsLinks[d["name"]];
+                          link.classed("currentPath", function(l,i) {
+                            return (linksPresent.indexOf(i) != -1);
                           });
 
                         });
 
                     // Set the stroke width back to normal when mouse leaves the node.
                     node.on('mouseout', function() {
-                      // link.style('stroke-width', 1);
-                      // link.style('stroke', "gray")});
                       link.classed("currentPath",false);
                      });
 
