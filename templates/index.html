@@ -14,11 +14,32 @@
     <h1>WikiFlask</h1>
 
     <div id="main">
-    From: <input id = "from_text"></input>
+    <label>From</label>
+    <select id = "from_text">
+        {% for word in Words["from"] %}
+            {% if word == "Soweto" %}
+                <option value="{{word}}" selected="selected">{{word}}</option>
+            {% else %}
+                <option value="{{word}}">{{word}}</option>
+            {% endif %}        
+        {% endfor %}
+    </select>
+    <br>
+    <label>To</label>
+    <select id = "to_text">
+        {% for word in Words["to"] %}
+            {% if word == "Roodepoort" %}
+                <option value="{{word}}" selected="selected">{{word}}</option>
+            {% else %}
+                <option value="{{word}}">{{word}}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+<!--     From: <input id = "from_text"></input>
     </br>
     </br>
     To: <input id = "to_text"></input>
-    </br>
+    </br> -->
     </br>
     <button onclick="search()" id = "search">Click me!</button>
     <p id="searching" style="visibility:hidden">Searching...</p>
