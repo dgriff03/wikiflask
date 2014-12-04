@@ -1,52 +1,48 @@
 <!DOCTYPE HTML>
 <html>
-<head>
+  <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
     <title>WikiFlask</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
     <script src="/static/d3.v2.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/style.css">
-  
-</head>
-<body>
+
+  </head>
+  <body>
 
     <h1>WikiFlask</h1>
 
     <div id="main">
-    <label>From</label>
-    <select id = "from_text">
+      <label>From</label>
+      <select id = "from_text">
         {% for word in Words["from"] %}
-            {% if word == "Soweto" %}
-                <option value="{{word}}" selected="selected">{{word}}</option>
-            {% else %}
-                <option value="{{word}}">{{word}}</option>
-            {% endif %}        
+        {% if word == "2001" %}
+        <option value="{{word}}" selected="selected">{{word}}</option>
+        {% else %}
+        <option value="{{word}}">{{word}}</option>
+        {% endif %}    
         {% endfor %}
-    </select>
-    <br>
-    <label>To</label>
-    <select id = "to_text">
+      </select>
+      <br>
+      <label>To</label>
+      <select id = "to_text">
         {% for word in Words["to"] %}
-            {% if word == "Roodepoort" %}
-                <option value="{{word}}" selected="selected">{{word}}</option>
-            {% else %}
-                <option value="{{word}}">{{word}}</option>
-            {% endif %}
+        {% if word == "Monaco" %}
+        <option value="{{word}}" selected="selected">{{word}}</option>
+        {% else %}
+        <option value="{{word}}">{{word}}</option>
+        {% endif %}
         {% endfor %}
-    </select>
-<!--     From: <input id = "from_text"></input>
-    </br>
-    </br>
-    To: <input id = "to_text"></input>
-    </br> -->
-    </br>
-    <button onclick="search()" id = "search">Click me!</button>
-    <p id="searching" style="visibility:hidden">Searching...</p>
+      </select>
+      </br>
+      <button onclick="search()" id = "search">Click me!</button>
+      <p id="searching" style="visibility:hidden">Searching...</p>
     </div>
 
     <script src="/static/script.js"></script>
 
 
-</body>
+  </body>
 </html>
