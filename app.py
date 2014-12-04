@@ -1,3 +1,7 @@
+# Tony Cannistra, Brett Fischler, and Dan Griffin
+# Fall 2014
+# Comp50 Final Project
+
 from flask import Flask,render_template,request
 from flask import request
 import json
@@ -8,6 +12,8 @@ app = Flask(__name__)
 
 
 
+# Retrieves Zulu Wikipedia pages from static/words.json
+# Renders index.html template
 @app.route('/', methods=['get'])
 def home():
     try:
@@ -18,7 +24,7 @@ def home():
         Words = {"from": [], "to": []}
     return render_template("index.html", Words = Words)
 
-
+# Gets and returns all paths from from_page to to_page
 @app.route("/getData")
 def get_data():
     try:
@@ -30,10 +36,13 @@ def get_data():
             word_to = jdata["to_page"]
             word_from =jdata["from_page"]
         except:
+            # Defaults to Soweto -> Roodepoort on exception
             word_to = "Roodepoort"
             word_from = "Soweto"
         from ast import literal_eval
-        url = "http://ec2-54-173-58-136.compute-1.amazonaws.com:8001/titlelinks/path2?from={}&to={}".format(word_from,word_to)
+        url = "http://ec2-54-173-58-136.compute-1.amazonaws.com:8001/titlelinks/" + \
+              "path2?from={}&to={}".format(word_from,word_to)
+        # Makes request to use our path_finder algorithm
         res = requests.get(url)
         text = res.text
         text = text[15:-2]
